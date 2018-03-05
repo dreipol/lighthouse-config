@@ -1,0 +1,19 @@
+{
+  "name": "@dreipol/lighthouse-config",
+  "version": "0.0.1",
+  "description": "Basic lighthouse config",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dreipol/lighthouse-config.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dreipol/lighthouse-config/issues"
+  },
+  "homepage": "https://github.com/dreipol/lighthouse-config#readme"
+}
