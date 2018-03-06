@@ -3,6 +3,7 @@ module.exports = {
     paths: [
         '/',
     ],
+    folder: "../reports",
     chromeFlags: ['--window-size=1280,720'],
     disableEmulation: true,
     disableThrottling: true,
