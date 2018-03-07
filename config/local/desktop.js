@@ -4,7 +4,7 @@ module.exports = {
         '/',
     ],
     folder: "../reports",
-    chromeFlags: ['--window-size=1280,720'],
+    chromeFlags: ['--window-size=1280,1024'],
     disableEmulation: true,
     disableThrottling: true,
     saveReport: true,

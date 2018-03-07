@@ -1,10 +1,10 @@
 module.exports = {
-    url: 'https://www.amigos.ch/',
+    url: 'https://example.com/',
     paths: [
         '/',
     ],
     folder: "../reports",
-    chromeFlags: ['--window-size=1280,720'],
+    chromeFlags: ['--window-size=1280,1024'],
     disableEmulation: true,
     disableThrottling: true,
     saveReport: true,
