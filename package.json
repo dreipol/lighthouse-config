@@ -1,6 +1,6 @@
 {
   "name": "@dreipol/lighthouse-config",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Basic lighthouse config",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
