@@ -10,6 +10,7 @@ module.exports = {
     disableThrottling: true,
     saveReport: true,
     budget: {
+        dreipol: 100,
         performance: 90,
         pwa: false,
         accessibility: 70,
@@ -199,13 +200,13 @@ module.exports = {
             'manual-pwa-checks': {
                 title: 'Additional items to manually check',
                 description: 'These checks are required by the baseline ' +
-                '[PWA Checklist](https://developers.google.com/web/progressive-web-apps/checklist) but are ' +
-                'not automatically checked by Lighthouse. They do not affect your score but it\'s important that you verify them manually.',
+                    '[PWA Checklist](https://developers.google.com/web/progressive-web-apps/checklist) but are ' +
+                    'not automatically checked by Lighthouse. They do not affect your score but it\'s important that you verify them manually.',
             },
             'seo-mobile': {
                 title: 'Mobile Friendly',
                 description: 'Make sure your pages are mobile friendly so users don’t have to pinch or zoom ' +
-                'in order to read the content pages. [Learn more](https://developers.google.com/search/mobile-sites/).',
+                    'in order to read the content pages. [Learn more](https://developers.google.com/search/mobile-sites/).',
             },
             'seo-content': {
                 title: 'Content Best Practices',

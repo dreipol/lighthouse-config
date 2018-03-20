@@ -5,8 +5,13 @@ config.url = 'https://example.com';
 config.paths = [
     '/',
 ];
-config.report.passes[0].gatherers.push(gatherer);
-config.report.audits.push(audit);
+config.report.passes[0].gatherers.push( 
+    require.resolve('@dreipol/lighthouse-audits/brokenlink/gatherer')
+ );
+
+config.report.audits.push(
+    require.resolve('@dreipol/lighthouse-audits/brokenlink/audit')
+);
 config.report.categories.dreipol = {
     name: 'Dreipol Audits',
     description: 'Dreipol audits',
