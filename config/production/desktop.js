@@ -10,6 +10,7 @@ module.exports = {
     saveReport: true,
     budget: {
         dreipol: 100,
+        seo: 90,
         performance: 90,
         pwa: false,
         accessibility: 70,
@@ -145,6 +146,16 @@ module.exports = {
             'dobetterweb/script-blocking-first-paint',
             'dobetterweb/uses-http2',
             'dobetterweb/uses-passive-event-listeners',
+            'seo/meta-description',
+            'seo/http-status-code',
+            'seo/font-size',
+            'seo/link-text',
+            'seo/is-crawlable',
+            'seo/hreflang',
+            'seo/plugins',
+            'seo/canonical',
+            'seo/manual/mobile-friendly',
+            'seo/manual/structured-data',
         ],
 
         groups: {
@@ -333,6 +344,27 @@ module.exports = {
                     { id: 'image-aspect-ratio', weight: 1 },
                 ],
             },
+
+            'seo': {
+                name: 'SEO',
+                description: 'These checks ensure that your page is optimized for search engine results ranking. ' +
+                    'There are additional factors Lighthouse does not check that may affect your search ranking. ' +
+                    '[Learn more](https://support.google.com/webmasters/answer/35769).',
+                audits: [
+                    { id: 'viewport', weight: 1, group: 'seo-mobile' },
+                    { id: 'document-title', weight: 1, group: 'seo-content' },
+                    { id: 'meta-description', weight: 1, group: 'seo-content' },
+                    { id: 'http-status-code', weight: 1, group: 'seo-crawl' },
+                    { id: 'link-text', weight: 1, group: 'seo-content' },
+                    { id: 'is-crawlable', weight: 1, group: 'seo-crawl' },
+                    { id: 'hreflang', weight: 1, group: 'seo-content' },
+                    { id: 'canonical', weight: 1, group: 'seo-content' },
+                    { id: 'font-size', weight: 1, group: 'seo-mobile' },
+                    { id: 'plugins', weight: 1, group: 'seo-content' },
+                    { id: 'mobile-friendly', weight: 0, group: 'manual-seo-checks' },
+                    { id: 'structured-data', weight: 0, group: 'manual-seo-checks' },
+                ],
+            }
         },
     },
 };
