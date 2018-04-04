@@ -1,5 +1,5 @@
 
-modele.exports = function (config) {
+moduele.exports = function (config) {
 
     // configure path to be reported
     config.paths = [
