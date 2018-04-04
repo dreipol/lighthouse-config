@@ -18,7 +18,7 @@ module.exports = {
     },
     persisters: {
         modules: [
-            'html'
+            'html', 'json'
         ]
     },
     report: {
