@@ -1,3 +1,4 @@
+const constants = require('../constants');
 
 module.exports = {
     url: 'http://localhost:8000',
@@ -23,57 +24,83 @@ module.exports = {
         ]
     },
     report: {
-        settings: {},
-        passes: [
+        settings: constants.defaultSettings,
+        passes: [{
+            passName: 'defaultPass',
+            recordTrace: true,
+            useThrottling: true,
+            pauseAfterLoadMs: 5250,
+            networkQuietThresholdMs: 5250,
+            cpuQuietThresholdMs: 5250,
+            gatherers: [
+                'url',
+                'scripts',
+                'css-usage',
+                'viewport',
+                'viewport-dimensions',
+                'theme-color',
+                'manifest',
+                'runtime-exceptions',
+                'chrome-console-messages',
+                'image-usage',
+                'accessibility',
+                'dobetterweb/all-event-listeners',
+                'dobetterweb/anchors-with-no-rel-noopener',
+                'dobetterweb/appcache',
+                'dobetterweb/domstats',
+                'dobetterweb/js-libraries',
+                'dobetterweb/optimized-images',
+                'dobetterweb/password-inputs-with-prevented-paste',
+                'dobetterweb/tags-blocking-first-paint',
+                'dobetterweb/websql',
+                'seo/meta-description',
+                'seo/font-size',
+                'seo/crawlable-links',
+                'seo/meta-robots',
+                'seo/hreflang',
+                'seo/embedded-content',
+                'seo/canonical',
+                'seo/robots-txt',
+                'fonts',
+            ],
+        },
             {
-                passName: 'defaultPass',
-                recordTrace: true,
-                pauseAfterLoadMs: 10000,
-                networkQuietThresholdMs: 5000,
-                pauseAfterNetworkQuietMs: 5000,
-                cpuQuietThresholdMs: 5250,
+                passName: 'offlinePass',
                 gatherers: [
-                    'url',
-                    'scripts',
-                    'css-usage',
-                    'viewport',
-                    'viewport-dimensions',
-                    'theme-color',
-                    'manifest',
-                    'runtime-exceptions',
-                    'chrome-console-messages',
-                    'image-usage',
-                    'accessibility',
-                    'dobetterweb/all-event-listeners',
-                    'dobetterweb/anchors-with-no-rel-noopener',
-                    'dobetterweb/appcache',
-                    'dobetterweb/domstats',
-                    'dobetterweb/js-libraries',
-                    'dobetterweb/optimized-images',
-                    'dobetterweb/password-inputs-with-prevented-paste',
-                    'dobetterweb/response-compression',
-                    'dobetterweb/tags-blocking-first-paint',
-                    'dobetterweb/websql',
-                    'seo/meta-description',
-                    'seo/font-size',
-                    'seo/crawlable-links',
-                    'seo/meta-robots',
-                    'seo/hreflang',
-                    'seo/embedded-content',
-                    'seo/canonical',
-                    'fonts',
+                    'service-worker',
+                    'offline',
+                    'start-url',
                 ],
             },
-        ],
+            {
+                passName: 'redirectPass',
+                // Speed up the redirect pass by blocking stylesheets, fonts, and images
+                blockedUrlPatterns: ['*.css', '*.jpg', '*.jpeg', '*.png', '*.gif', '*.svg', '*.ttf', '*.woff', '*.woff2'],
+                gatherers: [
+                    'http-redirect',
+                    'html-without-javascript',
+                ],
+            }],
         audits: [
+            'redirects-http',
             'service-worker',
+            'works-offline',
             'viewport',
             'without-javascript',
+            'first-meaningful-paint',
+            'load-fast-enough-for-pwa',
+            'speed-index-metric',
+            'screenshot-thumbnails',
+            'estimated-input-latency',
             'errors-in-console',
+            'time-to-first-byte',
             'first-interactive',
             'consistently-interactive',
+            'user-timings',
             'critical-request-chains',
             'redirects',
+            'webapp-install-banner',
+            'splash-screen',
             'themed-omnibox',
             'manifest-short-name-length',
             'content-width',
@@ -83,6 +110,7 @@ module.exports = {
             'bootup-time',
             'uses-rel-preload',
             'font-display',
+            'network-requests',
             'manual/pwa-cross-browser',
             'manual/pwa-page-transitions',
             'manual/pwa-each-page-has-url',
@@ -131,12 +159,11 @@ module.exports = {
             'accessibility/manual/offscreen-content-hidden',
             'accessibility/manual/use-landmarks',
             'accessibility/manual/visual-order-follows-dom',
-            'byte-efficiency/total-byte-weight',
             'byte-efficiency/offscreen-images',
             'byte-efficiency/unused-css-rules',
             'byte-efficiency/uses-webp-images',
             'byte-efficiency/uses-optimized-images',
-            'byte-efficiency/uses-request-compression',
+            // 'byte-efficiency/uses-text-compression',
             'byte-efficiency/uses-responsive-images',
             'dobetterweb/appcache-manifest',
             'dobetterweb/dom-size',
@@ -152,6 +179,7 @@ module.exports = {
             'dobetterweb/script-blocking-first-paint',
             'dobetterweb/uses-http2',
             'dobetterweb/uses-passive-event-listeners',
+            // 'seo/robots-txt',
             'seo/meta-description',
             'seo/http-status-code',
             'seo/font-size',
@@ -216,13 +244,13 @@ module.exports = {
             'manual-pwa-checks': {
                 title: 'Additional items to manually check',
                 description: 'These checks are required by the baseline ' +
-                    '[PWA Checklist](https://developers.google.com/web/progressive-web-apps/checklist) but are ' +
-                    'not automatically checked by Lighthouse. They do not affect your score but it\'s important that you verify them manually.',
+                '[PWA Checklist](https://developers.google.com/web/progressive-web-apps/checklist) but are ' +
+                'not automatically checked by Lighthouse. They do not affect your score but it\'s important that you verify them manually.',
             },
             'seo-mobile': {
                 title: 'Mobile Friendly',
                 description: 'Make sure your pages are mobile friendly so users don’t have to pinch or zoom ' +
-                    'in order to read the content pages. [Learn more](https://developers.google.com/search/mobile-sites/).',
+                'in order to read the content pages. [Learn more](https://developers.google.com/search/mobile-sites/).',
             },
             'seo-content': {
                 title: 'Content Best Practices',
@@ -238,12 +266,15 @@ module.exports = {
             },
         },
         categories: {
-            performance: {
+            'performance': {
                 name: 'Performance',
                 description: 'These encapsulate your web app\'s current performance and opportunities to improve it.',
                 audits: [
+                    { id: 'first-meaningful-paint', weight: 5, group: 'perf-metric' },
                     { id: 'first-interactive', weight: 5, group: 'perf-metric' },
                     { id: 'consistently-interactive', weight: 5, group: 'perf-metric' },
+                    { id: 'speed-index-metric', weight: 1, group: 'perf-metric' },
+                    { id: 'estimated-input-latency', weight: 1, group: 'perf-metric' },
                     { id: 'link-blocking-first-paint', weight: 0, group: 'perf-hint' },
                     { id: 'script-blocking-first-paint', weight: 0, group: 'perf-hint' },
                     { id: 'uses-responsive-images', weight: 0, group: 'perf-hint' },
@@ -251,24 +282,31 @@ module.exports = {
                     { id: 'unused-css-rules', weight: 0, group: 'perf-hint' },
                     { id: 'uses-optimized-images', weight: 0, group: 'perf-hint' },
                     { id: 'uses-webp-images', weight: 0, group: 'perf-hint' },
-                    { id: 'uses-request-compression', weight: 0, group: 'perf-hint' },
+                    // { id: 'uses-text-compression', weight: 0, group: 'perf-hint' },
+                    { id: 'time-to-first-byte', weight: 0, group: 'perf-hint' },
                     { id: 'redirects', weight: 0, group: 'perf-hint' },
                     { id: 'uses-rel-preload', weight: 0, group: 'perf-hint' },
-                    { id: 'total-byte-weight', weight: 0, group: 'perf-info' },
                     { id: 'dom-size', weight: 0, group: 'perf-info' },
                     { id: 'critical-request-chains', weight: 0, group: 'perf-info' },
+                    { id: 'network-requests', weight: 0 },
+                    { id: 'user-timings', weight: 0, group: 'perf-info' },
                     { id: 'bootup-time', weight: 0, group: 'perf-info' },
+                    { id: 'screenshot-thumbnails', weight: 0 },
                     { id: 'mainthread-work-breakdown', weight: 0, group: 'perf-info' },
                     { id: 'font-display', weight: 0, group: 'perf-info' },
                 ],
             },
-            pwa: {
+            'pwa': {
                 name: 'Progressive Web App',
-                weight: 1,
                 description: 'These checks validate the aspects of a Progressive Web App, as specified by the baseline [PWA Checklist](https://developers.google.com/web/progressive-web-apps/checklist).',
                 audits: [
                     { id: 'service-worker', weight: 1 },
+                    { id: 'works-offline', weight: 1 },
                     { id: 'without-javascript', weight: 1 },
+                    { id: 'redirects-http', weight: 1 },
+                    { id: 'load-fast-enough-for-pwa', weight: 1 },
+                    { id: 'webapp-install-banner', weight: 1 },
+                    { id: 'splash-screen', weight: 1 },
                     { id: 'themed-omnibox', weight: 1 },
                     { id: 'viewport', weight: 1 },
                     { id: 'content-width', weight: 1 },
@@ -277,7 +315,7 @@ module.exports = {
                     { id: 'pwa-each-page-has-url', weight: 0, group: 'manual-pwa-checks' },
                 ],
             },
-            accessibility: {
+            'accessibility': {
                 name: 'Accessibility',
                 description: 'These checks highlight opportunities to [improve the accessibility of your web app](https://developers.google.com/web/fundamentals/accessibility). Only a subset of accessibility issues can be automatically detected so manual testing is also encouraged.',
                 audits: [
@@ -328,7 +366,7 @@ module.exports = {
                     { id: 'use-landmarks', weight: 0, group: 'manual-a11y-checks' },
                 ],
             },
-            'best-practices': { //eslint-disable-line
+            'best-practices': {
                 name: 'Best Practices',
                 description: 'We\'ve compiled some recommendations for modernizing your web app and avoiding performance pitfalls.',
                 audits: [
@@ -352,8 +390,8 @@ module.exports = {
             'seo': {
                 name: 'SEO',
                 description: 'These checks ensure that your page is optimized for search engine results ranking. ' +
-                    'There are additional factors Lighthouse does not check that may affect your search ranking. ' +
-                    '[Learn more](https://support.google.com/webmasters/answer/35769).',
+                'There are additional factors Lighthouse does not check that may affect your search ranking. ' +
+                '[Learn more](https://support.google.com/webmasters/answer/35769).',
                 audits: [
                     { id: 'viewport', weight: 1, group: 'seo-mobile' },
                     { id: 'document-title', weight: 1, group: 'seo-content' },
@@ -361,6 +399,7 @@ module.exports = {
                     { id: 'http-status-code', weight: 1, group: 'seo-crawl' },
                     { id: 'link-text', weight: 1, group: 'seo-content' },
                     { id: 'is-crawlable', weight: 1, group: 'seo-crawl' },
+                    // { id: 'robots-txt', weight: 1, group: 'seo-crawl' },
                     { id: 'hreflang', weight: 1, group: 'seo-content' },
                     { id: 'canonical', weight: 1, group: 'seo-content' },
                     { id: 'font-size', weight: 1, group: 'seo-mobile' },
@@ -368,7 +407,7 @@ module.exports = {
                     { id: 'mobile-friendly', weight: 0, group: 'manual-seo-checks' },
                     { id: 'structured-data', weight: 0, group: 'manual-seo-checks' },
                 ],
-            }
+            },
         },
-    },
+    }
 };
