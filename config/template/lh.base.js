@@ -1,5 +1,5 @@
 
-moduele.exports = function (config) {
+module.exports = function (config) {
 
     // configure path to be reported
     config.paths = [
