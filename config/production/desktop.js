@@ -6,6 +6,7 @@ module.exports = {
         '/',
     ],
     folder: "../reports",
+    tag: 'desktop',
     chromeFlags: ['--window-size=1280,1024'],
     disableEmulation: true,
     disableThrottling: true,
