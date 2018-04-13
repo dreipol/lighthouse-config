@@ -14,7 +14,7 @@ module.exports = {
         dreipol: 100,
         seo: 90,
         performance: 90,
-        pwa: false,
+        pwa: 70,
         accessibility: 70,
         'best-practices': 70,
     },

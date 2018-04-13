@@ -9,7 +9,7 @@ module.exports = function (config) {
     // define a budget for the project
     config.budget = {
         performance: 90,
-        pwa: false,
+        pwa: 70,
         accessibility: 70,
         'best-practices': 70,
         dreipol: 95,
