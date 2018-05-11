@@ -5,7 +5,7 @@ module.exports = {
     paths: [
         '/',
     ],
-    folder: "../reports",
+    folder: "../dreihouse-reports",
     tag: 'desktop',
     chromeFlags: ['--window-size=1280,1024'],
     disableEmulation: true,
@@ -22,7 +22,6 @@ module.exports = {
     reporters: {
         modules: [
             'html',
-            'json-dashboard'
         ]
     },
     report: {

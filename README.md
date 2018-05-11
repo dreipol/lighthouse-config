@@ -1,15 +1,66 @@
 # @dreipol/lighthouse-config
+Centralized location to hold the `@dreipol/lighthouse-runner` default configuration
 
-Basic configuration files for the lighthouse reporting
+# Install
 
-## Usage
+    npm i @dreipol/lighthouse-config
 
-    const config = require('@dreipol/lighthouse-config/config/<ENV>/<DEVICE>');
+# Setup
+This module simply provides some default configuration. You can extend this config to your flavour.
+Therefore no setup for this module is required.
 
-- ENV can either be `local` or `production`
-- DEVICE can either be `desktop` or `mobile`
+## Config
 
-## Extend from the base config
+### Structure
+
+| field              | type          | default                                                        | value                                                                                                                           |
+| ------------------ | ------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| url                | string        | local:`http://localhsot:8000` production:`https://example.com` | The domain/webpage that has to be analyzed. |
+| paths              | Array<string> | `['/']`                                                        | Array of url paths. All these routes are tested and reported                                                                    |
+| chromeFlags        | Array<string> | `['--window-size=1200,800']`                                   | Array of additional chrome flags. [See all](https://peter.sh/experiments/chromium-command-line-switches/)                       |
+| folder             | string        | `../dreihouse-reports`                                         | Define location to store the reports                                                                                            |
+| disableEmulation   | boolean       | `true`                                                         | Applay device emulation                                                                                                         |
+| disableThrottling  | boolean       | `true`                                                         | Disable Network and CPU throttling                                                                                              |
+| saveReport         | boolean       | `true`                                                         | Save report as json file for further inspections                                                                                |
+| reporters.modules | Array<string, ResultReporterInterface> | `['html']`                             | Current available persisters are `html` `json` and `html-dashboard|
+| report             | Object        |                                                                | Lighthouse report configurations. [See exmaples](https://github.com/GoogleChrome/lighthouse/tree/master/lighthouse-core/config) |
+
+### Example
+    
+    url: 'http://localhost:8000',
+    paths: [
+        '/',
+    ],
+    folder: "../dreihouse-reports",
+    tag: 'desktop',
+    chromeFlags: ['--window-size=1280,1024'],
+    disableEmulation: true,
+    disableThrottling: true,
+    saveReport: true,
+    budget: {
+        dreipol: 100,
+        seo: 90,
+        performance: 90,
+        pwa: 70,
+        accessibility: 70,
+        'best-practices': 70,
+    },
+    reporters: {
+        modules: [
+            'html',
+            {
+                // my custom result reporter
+                key: 'FancyReporter',
+                handle: (results) => {
+                    console.log(results);
+                }
+            }
+        ]
+    },
+    report: {...}
+
+
+### Extend from the base config
 You can extend the base configuration with your own configuration. This is done by creating a new config file in your project and include the base config via require. Then you can edit the Object the way you want
 
 Example for local mobile config:
@@ -22,18 +73,3 @@ Example for local mobile config:
 
     module.exports = mobileConfig;
 
-
-
-## Structure
-
-| field              | type          | default                                                        | value                                                                                                                           |
-| ------------------ | ------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| url                | string        | local:`http://localhsot:8000` production:`https://example.com` | where all the reports are run                                                                                                   |
-| paths              | Array<string> | [`/`]                                                          | Array of url paths. All these routes are tested and reported                                                                    |
-| chromeFlags        | Array<string> | ['--window-size=1200,800']                                     | Array of additional chrome flags. [See all](https://peter.sh/experiments/chromium-command-line-switches/)                       |
-| folder             | string        | `../reports`                                                   | Define location to store the reports                                                                                            |
-| disableEmulation   | boolean       | `true`                                                         | Applay device emulation                                                                                                         |
-| disableThrottling  | boolean       | `true`                                                         | Disable Network and CPU throttling                                                                                              |
-| saveReport         | boolean       | `true`                                                         | Save report as json file for further inspections                                                                                |
-| report             | Object        |                                                                | Lighthouse report configurations. [See exmaples](https://github.com/GoogleChrome/lighthouse/tree/master/lighthouse-core/config) |
-| persisters.modules | Array         | ['html']                                               | Current available persisters are `html` `json` and `html-dashboard`                                                                                 |
