@@ -1,3 +1,8 @@
+const {
+    PSI,
+    BrokenLink,
+    Categories,
+} = require('@dreipol/lighthouse-audits');
 
 module.exports = function (config) {
 
@@ -16,27 +21,37 @@ module.exports = function (config) {
         seo: 95,
     };
 
-    // add custom data gatherers
-    config.report.passes[0].gatherers.push(
-        require.resolve('@dreipol/lighthouse-audits/brokenlink/gatherer'),
-        require.resolve('@dreipol/lighthouse-audits/plain-email/gatherer')
-    );
-
     // add custom audits
     config.report.audits.push(
-        require.resolve('@dreipol/lighthouse-audits/brokenlink/audit'),
-        require.resolve('@dreipol/lighthouse-audits/plain-email/audit')
+        PSI.PSISpeedScoreAudit,
+        PSI.PSIUsabilityScoreAudit,
+
+        PSI.PSIHTMLSizeAudit,
+        PSI.PSIImgSizeAudit,
+        PSI.PSICssSizeAudit,
+        PSI.PSICssResourcesAudit,
+        PSI.PSIJsSizeAudit,
+        PSI.PSIJsResourcesAudit,
+
+        BrokenLink.BrokenLinkAudit,
     );
 
-    // create custom category
-    config.report.categories.dreipol = {
-        name: 'Dreipol Audits',
-        description: 'Dreipol audits',
-        audits: [
-            { id: 'brokenlink-audit', weight: 5 },
-            { id: 'plain-email-audit', weight: 0 },
-        ],
+    config.report.passes[0].psi = {
+        maxCssBytes: 1048576,
+        maxHtmlBytes: 1048576,
+        maxJsBytes: 1048576,
+        maxImgBytes: 1048576,
     };
+
+    // add custom data gatherersr
+    config.report.passes[0].gatherers.push(
+        PSI.PSIGatherer,
+        BrokenLink.BrokenLinkGatherer,
+    );
+
+
+    config.report.categories.psi = Categories.PSI;
+    config.report.categories.dreipol = Categories.Dreipol;
 
     return config;
 };

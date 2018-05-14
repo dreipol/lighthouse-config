@@ -19,11 +19,6 @@ module.exports = {
         accessibility: 70,
         'best-practices': 70,
     },
-    reporters: {
-        modules: [
-            'html',
-        ]
-    },
     report: {
         settings: constants.defaultSettings,
         passes: [{
@@ -33,6 +28,12 @@ module.exports = {
             pauseAfterLoadMs: 5250,
             networkQuietThresholdMs: 5250,
             cpuQuietThresholdMs: 5250,
+            psi: {
+                maxCssBytes: 1048576,
+                maxHtmlBytes: 1048576,
+                maxJsBytes: 1048576,
+                maxImgBytes: 1048576,
+            },
             gatherers: [
                 'url',
                 'scripts',
