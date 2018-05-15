@@ -19,6 +19,9 @@
     "moduleResolution": "node",
     "esModuleInterop": true
   },
+  "include":[
+    "./src/index.ts"
+  ],
   "exclude": [
     "node_modules",
     "test/**/*.ts",
