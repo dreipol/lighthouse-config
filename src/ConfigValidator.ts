@@ -1,7 +1,7 @@
 import * as joi from 'joi';
 
 import Schema from './schema/ConfigSchema';
-import DreihouseConfig from "@dreipol/lighthouse-runner/dist/Interfaces/Config/DreihouseConfig";
+import {DreihouseConfig} from "./index";
 
 export default class ConfigValidator {
     public static validate(config: DreihouseConfig): DreihouseConfig {
