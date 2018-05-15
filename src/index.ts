@@ -1,4 +1,6 @@
 import {Page} from 'puppeteer';
+import Schema from "./schema/ConfigSchema";
+import * as joi from "joi";
 
 export interface Budget {
     [index: string]: string | number | boolean | undefined;
@@ -29,7 +31,16 @@ export interface LoggerInterface {
     error(...args: string[]): void;
 }
 
-
 export interface PreAuditScriptInterface {
     execute(logger: LoggerInterface, page: Page): Promise<void>;
+}
+
+export class ConfigValidator {
+    public static validate(config: DreihouseConfig): DreihouseConfig {
+        const result = joi.validate(config, Schema);
+        if (result.error) {
+            throw new Error(result.error.message);
+        }
+        return result.value;
+    }
 }

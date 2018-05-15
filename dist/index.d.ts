@@ -27,3 +27,6 @@ export interface LoggerInterface {
 export interface PreAuditScriptInterface {
     execute(logger: LoggerInterface, page: Page): Promise<void>;
 }
+export declare class ConfigValidator {
+    static validate(config: DreihouseConfig): DreihouseConfig;
+}
