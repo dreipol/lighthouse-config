@@ -31,3 +31,4 @@ exports.default = Joi.object().keys({
         categories: Joi.object(),
     }).required(),
 });
+//# sourceMappingURL=ConfigSchema.js.map

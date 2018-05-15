@@ -2,7 +2,7 @@
   "name": "@dreipol/lighthouse-config",
   "version": "0.11.5",
   "description": "Basic lighthouse config",
-  "main": "./dist/ConfigValidator.js",
+  "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
     "test": "./node_modules/.bin/mocha -r ./node_modules/ts-node/register test/*.test.ts"
