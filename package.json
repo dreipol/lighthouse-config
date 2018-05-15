@@ -2,6 +2,8 @@
   "name": "@dreipol/lighthouse-config",
   "version": "0.9.0",
   "description": "Basic lighthouse config",
+  "main": "./dist/ConfigValidator.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,5 +16,14 @@
   "bugs": {
     "url": "https://github.com/dreipol/lighthouse-config/issues"
   },
-  "homepage": "https://github.com/dreipol/lighthouse-config#readme"
+  "homepage": "https://github.com/dreipol/lighthouse-config#readme",
+  "dependencies": {
+    "joi": "^13.3.0",
+    "tslint": "^5.10.0",
+    "typescript": "^2.8.3"
+  },
+  "devDependencies": {
+    "@dreipol/lighthouse-runner": "^0.23.2",
+    "@types/joi": "^13.0.8"
+  }
 }
