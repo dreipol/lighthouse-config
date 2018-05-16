@@ -63,7 +63,7 @@ You can extend the base configuration with your own configuration. This is done 
 
 Example for local mobile config:
 
-    let mobileConfig = require('@dreipol/lighthouse-config/config/local/desktop');
+    let mobileConfig = require('@dreipol/lighthouse-config/config/base/desktop');
 
     mobileConfig.chromeFlags = ['--window-size=320,480'];
     mobileConfig.disableEmulation = false;
