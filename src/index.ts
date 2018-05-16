@@ -13,7 +13,6 @@ export interface Budget {
 }
 
 export interface DreihouseConfig {
-    url: string;
     paths: string[];
     folder: string;
     report: any;

@@ -3,7 +3,6 @@ import {ConfigValidator} from '../src';
 import {expect} from 'chai';
 
 const DEFAULT_CONFIG = {
-    url: 'http://localhost:8000',
     paths: [
         '/',
     ],
@@ -35,7 +34,7 @@ describe('Validate Config', () => {
 
     it('Fail on incomplete config', (done) => {
         const config = {...DEFAULT_CONFIG};
-        delete config.url;
+        delete config.paths;
         try {
             ConfigValidator.validate(config);
             done(new Error('Invalid config should fail'));

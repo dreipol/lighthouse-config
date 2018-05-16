@@ -1,7 +1,6 @@
 import * as Joi from 'joi';
 
 export default Joi.object().keys({
-    url: Joi.string().required(),
     paths: Joi.array().items(Joi.string()).required(),
     folder: Joi.string().allow(null)
         .when('saveReport', {
