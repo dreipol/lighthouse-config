@@ -9,7 +9,6 @@ module.exports = {
     chromeFlags: ['--window-size=1280,1024'],
     disableEmulation: true,
     disableThrottling: true,
-    saveReport: true,
     budget: {
         dreipol: 100,
         seo: 90,

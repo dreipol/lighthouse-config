@@ -12,7 +12,6 @@ export interface DreihouseConfig {
     folder: string;
     report: any;
     chromeFlags: string[];
-    saveReport: boolean;
     disableEmulation: boolean;
     disableThrottling: boolean;
     budget: Budget;
