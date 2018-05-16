@@ -15,10 +15,9 @@ Therefore no setup for this module is required.
 
 | field              | type          | default                                                        | value                                                                                                                           |
 | ------------------ | ------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| url                | string        | local:`http://localhsot:8000` production:`https://example.com` | The domain/webpage that has to be analyzed. |
 | paths              | Array<string> | `['/']`                                                        | Array of url paths. All these routes are tested and reported                                                                    |
 | chromeFlags        | Array<string> | `['--window-size=1200,800']`                                   | Array of additional chrome flags. [See all](https://peter.sh/experiments/chromium-command-line-switches/)                       |
-| folder             | string        | `../dreihouse-reports`                                         | Define location to store the reports                                                                                            |
+| folder             | string        | `./dreihouse-reports`                                         | Define location to store the reports                                                                                            |
 | disableEmulation   | boolean       | `true`                                                         | Applay device emulation                                                                                                         |
 | disableThrottling  | boolean       | `true`                                                         | Disable Network and CPU throttling                                                                                              |
 | saveReport         | boolean       | `true`                                                         | Save report as json file for further inspections                                                                                |
@@ -27,11 +26,10 @@ Therefore no setup for this module is required.
 
 ### Example
     
-    url: 'http://localhost:8000',
     paths: [
         '/',
     ],
-    folder: "../dreihouse-reports",
+    folder: "./dreihouse-reports",
     tag: 'desktop',
     chromeFlags: ['--window-size=1280,1024'],
     disableEmulation: true,

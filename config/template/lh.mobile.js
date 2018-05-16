@@ -1,4 +1,4 @@
-let mobileConfig = require('./lh.local.desktop');
+let mobileConfig = require('./lh.desktop');
 
 mobileConfig.chromeFlags = ['--window-size=1280,720'];
 mobileConfig.disableEmulation = false;

@@ -1,11 +1,10 @@
 const constants = require('../constants');
 
 module.exports = {
-    url: 'https://example.com/',
     paths: [
         '/',
     ],
-    folder: "../dreihouse-reports",
+    folder: "./dreihouse-reports",
     tag: 'desktop',
     chromeFlags: ['--window-size=1280,1024'],
     disableEmulation: true,
