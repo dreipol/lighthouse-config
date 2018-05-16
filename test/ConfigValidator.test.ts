@@ -11,7 +11,6 @@ const DEFAULT_CONFIG = {
     chromeFlags: ['--headless'],
     disableEmulation: true,
     disableThrottling: true,
-    saveReport: true,
     preAuditScripts: [],
     budget: {
         dreipol: 100,
@@ -43,10 +42,9 @@ describe('Validate Config', () => {
         }
     });
 
-    it('`folder` is not required when `saveReport` is false', (done) => {
+    it('`folder` can be null', (done) => {
         const config = {
             ...DEFAULT_CONFIG, ...{
-                saveReport: false,
                 folder: null,
             },
         };
@@ -60,18 +58,17 @@ describe('Validate Config', () => {
         }
     });
 
-    it('`folder` is required when `saveReport` is true', (done) => {
+    it('`folder` can be null', (done) => {
         const config = {
-            ...DEFAULT_CONFIG, ...{
-                saveReport: true,
-            },
+            ...DEFAULT_CONFIG,
         };
 
         delete config.folder;
 
         try {
+            // @ts-ignore
             ConfigValidator.validate(config);
-            done(new Error('Invalid config should fail'));
+            done(new Error('Folder should be set in config'));
         } catch (e) {
             done();
         }

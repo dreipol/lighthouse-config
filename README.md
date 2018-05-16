@@ -11,7 +11,6 @@ Therefore no setup for this module is required.
 
 ## Config
 
-### Structure
 
 | field              | type          | default                                                        | value                                                                                                                           |
 | ------------------ | ------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
@@ -20,10 +19,50 @@ Therefore no setup for this module is required.
 | folder             | string        | `./dreihouse-reports`                                         | Define location to store the reports                                                                                            |
 | disableEmulation   | boolean       | `true`                                                         | Applay device emulation                                                                                                         |
 | disableThrottling  | boolean       | `true`                                                         | Disable Network and CPU throttling                                                                                              |
-| saveReport         | boolean       | `true`                                                         | Save report as json file for further inspections                                                                                |
-| reporters.modules | Array<string, ResultReporterInterface> | `['html']`                             | Current available persisters are `html` `json` and `html-dashboard|
+| preAuditScripts| Array<PreAuditScriptInterface> | `['html']`                             | Current available persisters are `html` `json` and `html-dashboard|
 | report             | Object        |                                                                | Lighthouse report configurations. [See exmaples](https://github.com/GoogleChrome/lighthouse/tree/master/lighthouse-core/config) |
 
+### preAuditScripts
+In order to handle login forms, or do other modifications of the page before lighthouse audits the page,
+you can add some `preAuditScripts` in the config. Those scripts are executed right before lighthouse starts.
+These scripts have to implement the [`PreAuditScriptInterface`](src/index.ts) interface.
+
+The will be already on your desired route
+
+Here is an example of such login script
+    
+    module.exports = {
+        execute:async(logger, page) {
+            await page.waitForSelector('#username', { visible: true });
+            await page.waitForSelector('#password', { visible: true });
+            
+            const usernameInput = await page.$('#username');
+            const passwordInput = await page.$('#password');
+            
+            await usernameInput.type(process.env.LOGIN_USERNAME);
+            await passwordInput.type(process.env.LOGIN_PASSWORD);
+            
+            await passwordInput.press('Enter');
+        }
+    }
+    
+    
+Now in your `config` file you can load the login script
+
+
+    ...
+    saveReport: true,
+    budget: {
+        ...
+    },
+    preAuditScripts: [
+        require('your/login/script.js'),
+    ],
+    reporters: {
+        modules: [
+            ...
+            
+            
 ### Example
     
     paths: [
@@ -34,7 +73,6 @@ Therefore no setup for this module is required.
     chromeFlags: ['--window-size=1280,1024'],
     disableEmulation: true,
     disableThrottling: true,
-    saveReport: true,
     budget: {
         dreipol: 100,
         seo: 90,
