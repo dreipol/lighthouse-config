@@ -1,4 +1,6 @@
 import { Page } from 'puppeteer';
+import { LighthouseConfigInterface } from "./LighthouseConfigInterface";
+export * from "./LighthouseConfigInterface";
 export interface Budget {
     [index: string]: string | number | boolean | undefined;
     dreipol?: string | number | boolean;
@@ -10,7 +12,7 @@ export interface Budget {
 export interface DreihouseConfig {
     paths: string[];
     folder: string;
-    report: any;
+    report: LighthouseConfigInterface;
     chromeFlags: string[];
     disableEmulation: boolean;
     disableThrottling: boolean;
