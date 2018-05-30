@@ -2,26 +2,7 @@ import 'mocha';
 import {ConfigValidator} from '../src';
 import {expect} from 'chai';
 
-const DEFAULT_CONFIG = {
-    paths: [
-        '/',
-    ],
-    folder: './reports',
-    tag: 'default',
-    chromeFlags: ['--headless'],
-    disableEmulation: true,
-    disableThrottling: true,
-    preAuditScripts: [],
-    budget: {
-        dreipol: 100,
-        seo: 90,
-        performance: 90,
-        pwa: false,
-        accessibility: 70,
-        'best-practices': 70,
-    },
-    report: {},
-};
+const DEFAULT_CONFIG = require('./data/config.js');
 
 describe('Validate Config', () => {
     it('Normalize config', () => {
