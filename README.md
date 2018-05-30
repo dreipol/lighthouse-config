@@ -25,7 +25,7 @@ Therefore no setup for this module is required.
 ### preAuditScripts
 In order to handle login forms, or do other modifications of the page before lighthouse audits the page,
 you can add some `preAuditScripts` in the config. Those scripts are executed right before lighthouse starts.
-These scripts have to implement the [`PreAuditScriptInterface`](src/index.ts) interface.
+These scripts have to implement the [`PreAuditScriptInterface`](src/PreAuditScriptInterface.ts) interface.
 
 The will be already on your desired route
 
