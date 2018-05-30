@@ -27,7 +27,7 @@ In order to handle login forms, or do other modifications of the page before lig
 you can add some `preAuditScripts` in the config. Those scripts are executed right before lighthouse starts.
 These scripts have to implement the [`PreAuditScriptInterface`](src/PreAuditScriptInterface.ts) interface.
 
-The will be already on your desired route
+Before execution of this script, the browser instance will already be on the inital url, passed in the `execute` method of `Dreihouse`
 
 Here is an example of such login script
     
@@ -80,18 +80,6 @@ Now in your `config` file you can load the login script
         pwa: 70,
         accessibility: 70,
         'best-practices': 70,
-    },
-    reporters: {
-        modules: [
-            'html',
-            {
-                // my custom result reporter
-                key: 'FancyReporter',
-                handle: (results) => {
-                    console.log(results);
-                }
-            }
-        ]
     },
     report: {...}
 
