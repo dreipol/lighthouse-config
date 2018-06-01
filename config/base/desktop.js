@@ -6,7 +6,7 @@ module.exports = {
     ],
     folder: "./dreihouse-reports",
     tag: 'desktop',
-    chromeFlags: ['--window-size=1280,1024'],
+    chromeFlags: ['--window-size=1280,1024', '--headless'],
     disableEmulation: true,
     disableThrottling: true,
     budget: {
